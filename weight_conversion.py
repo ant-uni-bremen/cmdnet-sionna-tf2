@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue July 12 11:32:57 2022
+
+@author: beck
+"""
+from sionna.mapping import Constellation
+import myfunctions as mf
+import MIMO_sionna as ms
+
+
+def weight_conversion():
+    '''Weight saving: Conversion of old weight data into new separate files
+    '''
+    mod = 'qam'
+    mod0 = 'QPSK' # BPSK, QPSK, QAM16
+    fn_ext = 'binary' # _binary_tau0.1, _tau0.1, _convex, _binary_tau0.075, _binary_splin
+    num_tx_ant = 8
+    num_rx_ant = 8
+    num_bits_per_symbol = 2
+    Nit = 16
+    binary = True
+    constellation = Constellation(mod, num_bits_per_symbol, trainable = False)
+    
+    saveobj2 = mf.savemodule('npz')
+    train_hist2 = mf.training_history()
+    sim_set = {'Mod': mod0, 'Nr': 2 * num_rx_ant, 'Nt': 2 * num_tx_ant, 'L': Nit,}
+    fn = mf.filename_module('trainhist_', 'curves', 'CMD', '_' + fn_ext, sim_set)
+    train_hist2.dict2obj(saveobj2.load(fn.pathfile))
+    [delta0, taui0] = train_hist2.params[-1]
+    # delta0, taui0 = CMD_initpar(M = 2, L = 64, typ = 'default', min_val = 0.1)
+
+    algo1 = ms.algo_cmdnet(Nit, constellation, num_tx_ant, binary = binary, taui0 = taui0, delta0 = delta0)
+    # algo1 = algo_cmdnet(Nit, constellation, num_tx_ant, binary = binary, taui0 = taui0, delta0 = delta0)
+    sim_set = {'Mod': mod + str(num_bits_per_symbol), 'Nr': 2 * num_rx_ant, 'Nt':  2 * num_tx_ant, 'L': Nit,}
+    fn2 = ms.filename_module('data_MIMO_sionna', 'weights_', algo1.algo_name, fn_ext, sim_set)
+    # fn2 = filename_module('data_MIMO_sionna', 'weights_', algo1.algo_name, fn_ext, sim_set)
+    algo1.save_weights(fn2.pathfile)
+    # algo1.load_weights(fn2.pathfile)
+    
+    return delta0, taui0
+
+
+
+
+
+if __name__ == '__main__':
+#     my_func_main()
+# def my_func_main():
+    delta0, taui0 = weight_conversion()

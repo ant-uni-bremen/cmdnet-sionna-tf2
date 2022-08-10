@@ -1,0 +1,101 @@
+% This file was created with tikzplotlib v0.10.1.
+\begin{tikzpicture}
+
+\definecolor{crimson2143940}{RGB}{214,39,40}
+\definecolor{darkgray176}{RGB}{176,176,176}
+\definecolor{darkorange25512714}{RGB}{255,127,14}
+\definecolor{forestgreen4416044}{RGB}{44,160,44}
+\definecolor{lightgray204}{RGB}{204,204,204}
+\definecolor{steelblue31119180}{RGB}{31,119,180}
+
+\begin{axis}[
+legend cell align={left},
+legend style={
+  fill opacity=0.8,
+  draw opacity=1,
+  text opacity=1,
+  at={(0.03,0.03)},
+  anchor=south west,
+  draw=lightgray204
+},
+log basis y={10},
+tick align=outside,
+tick pos=left,
+title={Bit/Block Error Rate},
+x grid style={darkgray176},
+xlabel={\(\displaystyle E_b/N_0\) (dB)},
+xmajorgrids,
+xmin=2.5, xmax=13.5,
+xminorgrids,
+xtick style={color=black},
+y grid style={darkgray176},
+ylabel={BLER},
+ymajorgrids,
+ymin=0.000208766344858162, ymax=1.49221100609705,
+yminorgrids,
+ymode=log,
+ytick style={color=black}
+]
+\addplot [thick, steelblue31119180, dashed]
+table {%
+3 0.909375
+4 0.73125
+5 0.553125
+6 0.3375
+7 0.184375
+8 0.09140625
+9 0.0328125
+10 0.013125
+11 0.005
+12 0.0021875
+13 0.0003125
+};
+\addlegendentry{LMMSE (Uncorrelated) (BLER)}
+\addplot [thick, darkorange25512714, dashed]
+table {%
+3 0.821875
+4 0.565625
+5 0.328125
+6 0.190625
+7 0.084375
+8 0.042578125
+9 0.0178125
+10 0.006875
+11 0.0046875
+12 0.004375
+13 0.00375
+};
+\addlegendentry{AMP bin N_it = 64 (BLER)}
+\addplot [thick, forestgreen4416044, dashed]
+table {%
+3 0.996875
+4 0.990625
+5 0.934375
+6 0.80625
+7 0.60625
+8 0.446875
+9 0.1859375
+10 0.07375
+11 0.0325
+12 0.0090625
+13 0.001875
+};
+\addlegendentry{CMDNet bin N_L = 64 (BLER)}
+\addplot [thick, crimson2143940, dashed]
+table {%
+3 0.95
+4 0.84
+5 0.8
+6 0.61
+7 0.37
+8 0.26
+9 0.05
+10 0.01
+11 0
+12 0
+13 0
+};
+\addlegendentry{CMDNet bin N_L = 64 uncoded (BLER)}
+\end{axis}
+
+\end{tikzpicture}
