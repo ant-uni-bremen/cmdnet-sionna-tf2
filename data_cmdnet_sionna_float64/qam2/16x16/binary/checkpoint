@@ -1,0 +1,2 @@
+model_checkpoint_path: "weights_CMDNet_qam2_16_16_16_binary"
+all_model_checkpoint_paths: "weights_CMDNet_qam2_16_16_16_binary"
