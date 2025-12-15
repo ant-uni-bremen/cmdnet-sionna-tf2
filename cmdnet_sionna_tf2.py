@@ -20,11 +20,10 @@ import tensorflow as tf
 import sionna as sn
 from sionna.fec.ldpc.decoding import LDPC5GDecoder, LDPCBPDecoder
 from sionna.fec.ldpc.encoding import LDPC5GEncoder
-from sionna.mapping import Mapper, Demapper, Constellation
-from sionna.mimo import lmmse_equalizer
+from sionna.mapping import Mapper, Constellation  # , Demapper
 # For missing simulation of correlated massive MIMO channels
-from sionna.channel.utils import exp_corr_mat
-from sionna.channel import FlatFadingChannel, KroneckerModel
+# from sionna.channel.utils import exp_corr_mat
+from sionna.channel import FlatFadingChannel  # , KroneckerModel
 from sionna.utils import BinarySource, ebnodb2no, compute_ber, PlotBER
 from sionna.utils.metrics import BitwiseMutualInformation
 # import matplotlib.pyplot as plt
@@ -783,7 +782,7 @@ def script4_cmdnet_qpsk_32x32_with_channel_code(max_mc_iter=100, num_target_bloc
     return ber_plot
 
 
-def script5_cmdnet_qpsk_32x32_training(max_mc_iter=100, num_target_block_errors=100, batch_size=10000, it_print=100, code=0, tf1_channel_code=False, load_pretrained_cmdnet=False, trainbit=False):
+def script5_cmdnet_qpsk_32x32_training(max_mc_iter=100, num_target_block_errors=100, batch_size=10000, it_print=100, code=0, tf1_channel_code=False, load_pretrained_cmdnet=False, trainbit=False, train_iter=100000):
     '''Exemplary training for binary CMDNet for QPSK modulation and dimension 32x32 (effective BPSK modulation and dimension: 64x64)
     code: Joint training with code - New simulation/idea
     '''
@@ -820,17 +819,17 @@ def script5_cmdnet_qpsk_32x32_training(max_mc_iter=100, num_target_block_errors=
     # Compared to final trained weights from TF1
     sim_set = {'Mod': mod + str(num_bits_per_symbol), 'Nr': 2 *
                num_rx_ant, 'Nt':  2 * num_tx_ant, 'L': Nit, }
-    fn = cmd_utils.filename_module(sub_folder, 'weights_',
-                                   algo1_cmdnet.algo_name, 'binary_tau0.1', sim_set)
+    fn0 = cmd_utils.filename_module(sub_folder, 'weights_',
+                                    algo1_cmdnet.algo_name, 'binary_tau0.1', sim_set)
     if load_pretrained_cmdnet is True:
         # Load pretrained weights
-        algo1_cmdnet.load_weights(fn.pathfile)
+        algo1_cmdnet.load_weights(fn0.pathfile)
 
     model1_cmdnet = CommunicationModel(algo=algo1_cmdnet, num_tx_ant=num_tx_ant, num_rx_ant=num_rx_ant,
                                        const=constellation, code=code, code_it=code_it, code_train=code_train, tf1_channel_code=tf1_channel_code, trainbit=trainbit)
 
     # Training parameters
-    train_iter = 100000                 # 100000
+    # train_iter = 100000                 # 100000
     # w/o code: 1000 -> 500 ?, w code: 10/1
     if code is True:
         training_batch_size = 10
@@ -848,14 +847,12 @@ def script5_cmdnet_qpsk_32x32_training(max_mc_iter=100, num_target_block_errors=
                num_rx_ant, 'Nt':  2 * num_tx_ant, 'L': Nit, }
     fn = cmd_utils.filename_module(sub_folder, 'weights_',
                                    algo1_cmdnet.algo_name, 'test', sim_set)
-    # Path has to be shorter...
-    path = os.path.join(fn.path, 'weights')
-    model1_cmdnet.algo.save_weights(path)
+    model1_cmdnet.algo.save_weights(fn.pathfile)
 
     # Comparison to final trained weights from TF1
     algo2_cmdnet_trained = cmdnet_layers.AlgoCMDNet(Nit, constellation, num_tx_ant,
                                                     binary=True, taui0=taui0, delta0=delta0)
-    algo2_cmdnet_trained.load_weights(fn.pathfile)
+    algo2_cmdnet_trained.load_weights(fn0.pathfile)
     model2_cmdnet_trained = CommunicationModel(algo=algo2_cmdnet_trained, num_tx_ant=num_tx_ant, num_rx_ant=num_rx_ant,
                                                const=constellation, code=code, code_it=code_it, tf1_channel_code=tf1_channel_code, trainbit=trainbit)
 
@@ -904,30 +901,30 @@ if __name__ == '__main__':
     # 5: New joint training of CMDNet and 128x64/5G channel coding, QPSK 32x32 (BPSK 64x64)
     # 5 is so far not numerically and needs debugging (NaN at training time)
 
-    EXAMPLE = 5
+    EXAMPLE = 0
     # Use 128x64 from journal code (TF1_CHANNEL_CODE = True) or 5G channel code (TF1_CHANNEL_CODE = False)
-    TF1_CHANNEL_CODE = False
+    TF1_CHANNEL_CODE = True
     # Simulation parameters defining plot accuracy
     MAX_MC_ITER = 100              # 1000 in article, 100 for faster simulations
     NUM_TARGET_BLOCK_ERRORS = 100  # 1000 in article, 100 for faster simulations
 
     if EXAMPLE == 0:
-        ber_plot = script1_cmdnet_symbol_detection_qpsk_32x32(max_mc_iter=MAX_MC_ITER,
-                                                              num_target_block_errors=NUM_TARGET_BLOCK_ERRORS)
+        plot = script1_cmdnet_symbol_detection_qpsk_32x32(max_mc_iter=MAX_MC_ITER,
+                                                          num_target_block_errors=NUM_TARGET_BLOCK_ERRORS)
     elif EXAMPLE == 1:
-        ber_plot = script2_cmdnet_symbol_detection_qpsk_8x8(max_mc_iter=MAX_MC_ITER,
-                                                            num_target_block_errors=NUM_TARGET_BLOCK_ERRORS)
+        plot = script2_cmdnet_symbol_detection_qpsk_8x8(max_mc_iter=MAX_MC_ITER,
+                                                        num_target_block_errors=NUM_TARGET_BLOCK_ERRORS)
     elif EXAMPLE == 2:
-        ber_plot = script3_cmdnet_symbol_detection_qam16_32x32(max_mc_iter=MAX_MC_ITER,
-                                                               num_target_block_errors=NUM_TARGET_BLOCK_ERRORS)
+        plot = script3_cmdnet_symbol_detection_qam16_32x32(max_mc_iter=MAX_MC_ITER,
+                                                           num_target_block_errors=NUM_TARGET_BLOCK_ERRORS)
     elif EXAMPLE == 3:
-        ber_plot = script4_cmdnet_qpsk_32x32_with_channel_code(max_mc_iter=100,
-                                                               num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, batch_size=10, tf1_channel_code=TF1_CHANNEL_CODE)
+        plot = script4_cmdnet_qpsk_32x32_with_channel_code(max_mc_iter=100,
+                                                           num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, batch_size=10, tf1_channel_code=TF1_CHANNEL_CODE)
     elif EXAMPLE == 4:
-        ber_plot = script5_cmdnet_qpsk_32x32_training(max_mc_iter=MAX_MC_ITER,
-                                                      num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, it_print=100, trainbit=False)
+        plot = script5_cmdnet_qpsk_32x32_training(max_mc_iter=MAX_MC_ITER,
+                                                  num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, it_print=100, trainbit=True, train_iter=100000)
     elif EXAMPLE == 5:
-        ber_plot = script5_cmdnet_qpsk_32x32_training(max_mc_iter=MAX_MC_ITER,
-                                                      num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, it_print=100, load_pretrained_cmdnet=True, code=True, trainbit=True, tf1_channel_code=TF1_CHANNEL_CODE)
+        plot = script5_cmdnet_qpsk_32x32_training(max_mc_iter=MAX_MC_ITER,
+                                                  num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, it_print=100, load_pretrained_cmdnet=True, code=True, tf1_channel_code=TF1_CHANNEL_CODE, trainbit=True, train_iter=10000)
     else:
         print('No test script selected.')
