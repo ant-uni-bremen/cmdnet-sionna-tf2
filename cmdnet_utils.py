@@ -321,7 +321,7 @@ def encoder(b, G):
     return c
 
 
-# @tf.function  # (jit_compile = True)
+@tf.function  # (jit_compile = True)
 def encoder_tf(b, G):
     """
     Encode bitvector(s) b with generator matrix G (coding-theory style).
@@ -356,6 +356,11 @@ def encoder_tf(b, G):
 
 
 class LinearBlockEncoder(tf.keras.layers.Layer):
+    '''
+    LinearBlockEncoder class
+    G: Generator Matrix
+    '''
+
     def __init__(self, G, **kwargs):
         super().__init__(**kwargs)
         # store generator as a constant tensor (not trainable)
@@ -438,8 +443,8 @@ def mimo_coding(c, Nt, M, arch):
             c0 = np.concatenate((c, c_end), axis=-1)
         else:
             c0 = c
-        c1 = c0.reshape((-1, int(Nt * np.log2(M)), c0.shape[-1]))
-        c2 = c1.reshape((c1.shape[0], c1.shape[1], int(
+        c1 = np.reshape(c0, (-1, int(Nt * np.log2(M)), c0.shape[-1]))
+        c2 = np.reshape(c1, (c1.shape[0], c1.shape[1], int(
             c1.shape[-1] / np.log2(M)), int(np.log2(M))))
     elif arch == 'vert':
         fit2x = Nt * np.log2(M) / c.shape[-1]
@@ -461,6 +466,7 @@ def mimo_coding(c, Nt, M, arch):
                 c1.shape[-1] / np.log2(M)), int(np.log2(M)))), (0, 2, 1, 3))
     else:
         print('Architecture not available.')
+        c = c2
     return c2
 
 
@@ -476,9 +482,9 @@ def mimo_decoding(llr_c, n, Nt, M, arch):
     llr_c2: Original order of llr_c of dim (Nbc, n)
     '''
     if arch == 'horiz':
-        llr_c1 = np.transpose(np.transpose(llr_c, (1, 0, 2)).reshape(
-            (llr_c.shape[-2], -1, int(n + np.mod(np.log2(M) - n, np.log2(M))))), (1, 0, 2))
-        llr_c2 = llr_c1.reshape((-1, llr_c1.shape[-1]))[:, :n]
+        llr_c1 = np.transpose(np.reshape(np.transpose(llr_c, (1, 0, 2)),
+                                         (llr_c.shape[-2], -1, int(n + np.mod(np.log2(M) - n, np.log2(M))))), (1, 0, 2))
+        llr_c2 = np.reshape(llr_c1, (-1, llr_c1.shape[-1]))[:, :n]
     elif arch == 'vert':
         fit2x = Nt * np.log2(M) / n
         if int(fit2x) >= 1:
@@ -492,6 +498,7 @@ def mimo_decoding(llr_c, n, Nt, M, arch):
             llr_c2 = llr_c1[:, :n]
     else:
         print('Architecture not available.')
+        llr_c2 = llr_c
     return llr_c2
 
 
@@ -533,12 +540,12 @@ def gpu_select(number=0, memory_growth=True, cpus=0):
 # ------ Legacy ---------------------------
 
 
-class cmdnet_bin2(tf.keras.Model):
+class CMDNetBinaryLegacy(tf.keras.Model):
     '''Binary CMDNet layer
     '''
 
     def __init__(self, it, m, alpha, taui0=1, delta0=1):
-        super(cmdnet_bin2, self).__init__()
+        super(CMDNetBinaryLegacy, self).__init__()
         self.it = tf.constant(it)
         self.m = m
         self.M = m.shape[0]

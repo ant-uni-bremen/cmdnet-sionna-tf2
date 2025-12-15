@@ -10,16 +10,17 @@ You can find the original source code [here](https://github.com/ant-uni-bremen/C
 Choose an example test script in `cmdnet_sionna_tf2.py` by setting variable, e.g., `EXAMPLE = 0`:
 
 ### Scenarios
-0. CMDNet QPSK 64x64
-1. CMDNet QPSK 16x16
-2. CMDNet QAM16 64x64
-3. CMDNet QPSK 64x64 with code (float32 precision problem...)
-4. Training of CMDNet QPSK 64x64
+0. CMDNet QPSK 32x32
+1. CMDNet QPSK 8x8
+2. CMDNet QAM16 32x32
+3. CMDNet QPSK 32x32 with code
+4. Training of CMDNet QPSK 32x32
+5. New joint training of CMDNet with code (so far numerically unstable, debugging needed...)
 
-### Disclaimer
-Sionna and TensorFlow 2 make it difficult to use float64 computation accuracy for training and inference, which we used in the TensorFlow 1 version experiments. However, numerical experiments in TensorFlow 1 show that joint CMDNet and decoder performance decreases significantly with float32 instead of float64 computation accuracy. This explains why this TensorFlow 2 version cannot reproduce the joint equalization and decoding results in Scenario 3. We note that only specific changes may be required to make it work, not necessarily switching to overall float64 precision. Further research is required to clarify where the reason exactly lies.
+All experiments such as CMDNet symbol detection are reproducible.
 
-All other experiments such as CMDNet symbol detection are reproducible.
+However, CMDNet and LMMSE with the 128x6 LDPC channel code perform better in the TensorFlow 2 Sionna implementation. Further research is required to clarify where the reason exactly lies. Note that CMDNet without channel coding still outperforms LMMSE with channel coding.
+
 
 # Requirements
 
