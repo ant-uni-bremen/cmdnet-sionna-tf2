@@ -922,7 +922,7 @@ if __name__ == '__main__':
                                                            num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, batch_size=10, tf1_channel_code=TF1_CHANNEL_CODE)
     elif EXAMPLE == 4:
         plot = script5_cmdnet_qpsk_32x32_training(max_mc_iter=MAX_MC_ITER,
-                                                  num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, it_print=100, trainbit=True, train_iter=100000)
+                                                  num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, it_print=100, trainbit=False, train_iter=100000)
     elif EXAMPLE == 5:
         plot = script5_cmdnet_qpsk_32x32_training(max_mc_iter=MAX_MC_ITER,
                                                   num_target_block_errors=NUM_TARGET_BLOCK_ERRORS, it_print=100, load_pretrained_cmdnet=True, code=True, tf1_channel_code=TF1_CHANNEL_CODE, trainbit=True, train_iter=10000)

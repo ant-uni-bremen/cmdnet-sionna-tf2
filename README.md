@@ -1,13 +1,17 @@
-# CMDNet_Sionna_tf2
+# CMDNet for Sionna and TensorFlow 2: Concrete MAP Detection Network
 CMDNet implementation for Soft MIMO Detection in Nvidia's Sionna library and TensorFlow 2.
 
-This new CMDNet version is adapted for TensorFlow 2, as the original source code has been implemented in TensorFlow 1.15. Furthermore, we implemented CMDNet for Sionna using Keras as an agnostic backend to make it widely applicable for communication engineers. It also includes the Approximate Message Passing (AMP) algorithm.
+This new CMDNet version is adapted for TensorFlow 2, as the original source code [1] has been implemented in TensorFlow 1.15. Furthermore, we implemented CMDNet for Sionna using Keras as an agnostic backend to make it widely applicable for communication engineers. This repository also includes the Approximate Message Passing (AMP) algorithm.
 
-You can find the original source code [here](https://github.com/ant-uni-bremen/CMDNet) and on [Zenodo](https://doi.org/10.5281/zenodo.8416507).
+You can find the original source code [1] from the scientific research articles [2, 3] on [GitHub](https://github.com/ant-uni-bremen/CMDNet) and on [Zenodo](https://doi.org/10.5281/zenodo.8416507):
+
+1. Edgar Beck, Concrete MAP Detection Network (CMDNet) Software, Zenodo, version v1.0.2, Oct. 2023. doi: 10.5281/zenodo.8416507.
+2. Edgar Beck, Carsten Bockelmann, and Armin Dekorsy, “CMDNet: Learning a Probabilistic Relaxation of Discrete Variables for Soft Detection With Low Complexity,” IEEE Trans. Commun., vol. 69, no. 12, pp. 8214–8227, Dec. 2021. https://doi.org/10.1109/TCOMM.2021.3114682
+3. Edgar Beck, Carsten Bockelmann, and Armin Dekorsy, “Concrete MAP Detection: A Machine Learning Inspired Relaxation,” in 24th International ITG Workshop on Smart Antennas (WSA 2020), vol. 24, Hamburg, Germany, Feb. 2020, pp. 1–5.
 
 # Usage
 
-Choose an example test script in `cmdnet_sionna_tf2.py` by setting variable, e.g., `EXAMPLE = 0`:
+Choose an example test script in `cmdnet_sionna_tf2.py` by setting the variables, e.g., `EXAMPLE = 0`:
 
 ### Scenarios
 0. CMDNet QPSK 32x32
@@ -19,7 +23,7 @@ Choose an example test script in `cmdnet_sionna_tf2.py` by setting variable, e.g
 
 All journal article experiments such as CMDNet symbol detection are reproducible. Correlated massive MIMO channel matrices have not been implemented so far.
 
-However, CMDNet and LMMSE with the 128x6 LDPC channel code perform better in the TensorFlow 2 Sionna implementation. Further research is required to clarify where the reason exactly lies. Note that CMDNet without channel coding still outperforms LMMSE with channel coding.
+However, CMDNet and LMMSE with the 128x64 LDPC channel code perform better in the TensorFlow 2 Sionna implementation. Further research is required to clarify where the reason exactly lies. Note that CMDNet without channel coding still outperforms LMMSE with channel coding.
 
 
 # Requirements
@@ -38,16 +42,6 @@ This work was partly funded by the German Ministry of Education and Research (BM
 # License and Referencing
 
 This program is licensed under the GPLv3 license. If you in any way use this code for research that results in publications, please cite our original article listed below.
-
-# Publications
-
-Updated version of source code of
-1. Edgar Beck, Concrete MAP Detection Network (CMDNet) Software, Zenodo, version v1.0.2, Oct. 2023. doi: 10.5281/zenodo.8416507.
-
-from scientific research articles [2, 3]:
-
-2. Edgar Beck, Carsten Bockelmann, and Armin Dekorsy, “CMDNet: Learning a Probabilistic Relaxation of Discrete Variables for Soft Detection With Low Complexity,” IEEE Trans. Commun., vol. 69, no. 12, pp. 8214–8227, Dec. 2021. https://doi.org/10.1109/TCOMM.2021.3114682
-3. Edgar Beck, Carsten Bockelmann, and Armin Dekorsy, “Concrete MAP Detection: A Machine Learning Inspired Relaxation,” in 24th International ITG Workshop on Smart Antennas (WSA 2020), vol. 24, Hamburg, Germany, Feb. 2020, pp. 1–5.
 
 
 # Abstract of the articles
