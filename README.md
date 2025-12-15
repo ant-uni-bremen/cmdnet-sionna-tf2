@@ -17,7 +17,7 @@ Choose an example test script in `cmdnet_sionna_tf2.py` by setting variable, e.g
 4. Training of CMDNet QPSK 32x32
 5. New joint training of CMDNet with code (so far numerically unstable, debugging needed...)
 
-All experiments such as CMDNet symbol detection are reproducible.
+All journal article experiments such as CMDNet symbol detection are reproducible. Correlated massive MIMO channel matrices have not been implemented so far.
 
 However, CMDNet and LMMSE with the 128x6 LDPC channel code perform better in the TensorFlow 2 Sionna implementation. Further research is required to clarify where the reason exactly lies. Note that CMDNet without channel coding still outperforms LMMSE with channel coding.
 
