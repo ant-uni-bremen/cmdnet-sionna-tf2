@@ -15,8 +15,8 @@ import tensorflow as tf
 from sionna.mapping import Constellation
 import my_training as mt
 import my_functions as mf
-import cmdnet_sionna_tf2 as cmd_sionna
-import cmdnet_utils as cmd_utils
+import cmdnet_layers as cmd_layers
+import cmdnet_utils_original as cmd_utils
 
 GLOBAL_PRECISION = 'float64'
 
@@ -39,14 +39,14 @@ def weight_conversion():
     train_hist2 = mt.TrainingHistory()
     sim_set = {'Mod': mod0, 'Nr': 2 * num_rx_ant,
                'Nt': 2 * num_tx_ant, 'L': Nit, }
-    fn = mf.filename_module('trainhist_', 'curves',
+    fn = mf.filename_module('trainhist_', 'tf_curves',
                             'CMD', '_' + fn_ext, sim_set)
     train_hist2.dict2obj(saveobj2.load(fn.pathfile))
     [delta0, taui0] = train_hist2.params[-1]
     # delta0, taui0 = CMD_initpar(M = 2, L = 64, typ = 'default', min_val = 0.1)
 
-    algo1 = cmd_sionna.algo_cmdnet(Nit, constellation, num_tx_ant,
-                                   binary=binary, taui0=taui0, delta0=delta0)
+    algo1 = cmd_layers.AlgoCMDNet(Nit, constellation, num_tx_ant,
+                                  binary=binary, taui0=taui0, delta0=delta0)
     # algo1 = algo_cmdnet(Nit, constellation, num_tx_ant, binary = binary, taui0 = taui0, delta0 = delta0)
     sim_set = {'Mod': mod + str(num_bits_per_symbol), 'Nr': 2 *
                num_rx_ant, 'Nt':  2 * num_tx_ant, 'L': Nit, }
