@@ -460,6 +460,7 @@ def gpu_select(number=0, memory_growth=True, cpus=0):
     else:
         print('Will choose GPU or CPU automatically.')
 
+
 # ------ Legacy ---------------------------
 
 

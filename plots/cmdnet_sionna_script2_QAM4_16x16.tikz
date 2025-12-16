@@ -1,138 +1,138 @@
 % This file was created with tikzplotlib v0.10.1.
 \begin{tikzpicture}
 
-\definecolor{crimson2143940}{RGB}{214,39,40}
-\definecolor{darkgray176}{RGB}{176,176,176}
-\definecolor{darkorange25512714}{RGB}{255,127,14}
-\definecolor{forestgreen4416044}{RGB}{44,160,44}
-\definecolor{lightgray204}{RGB}{204,204,204}
-\definecolor{steelblue31119180}{RGB}{31,119,180}
+    \definecolor{crimson2143940}{RGB}{214,39,40}
+    \definecolor{darkgray176}{RGB}{176,176,176}
+    \definecolor{darkorange25512714}{RGB}{255,127,14}
+    \definecolor{forestgreen4416044}{RGB}{44,160,44}
+    \definecolor{lightgray204}{RGB}{204,204,204}
+    \definecolor{steelblue31119180}{RGB}{31,119,180}
 
-\begin{axis}[
-legend cell align={left},
-legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204},
-log basis y={10},
-tick align=outside,
-tick pos=left,
-title={Bit/Block Error Rate},
-x grid style={darkgray176},
-xlabel={\(\displaystyle E_b/N_0\) (dB)},
-xmajorgrids,
-xmin=-8.1, xmax=38.1,
-xminorgrids,
-xtick style={color=black},
-y grid style={darkgray176},
-ylabel={BER},
-ymajorgrids,
-ymin=0.000185273058277288, ymax=0.412786616917776,
-yminorgrids,
-ymode=log,
-ytick style={color=black}
-]
-\addplot [thick, steelblue31119180]
-table {%
-1 0.1412
-2 0.125475
-3 0.107525
-4 0.0924875
-5 0.0771125
-6 0.066125
-7 0.0544
-8 0.0441
-9 0.0357625
-10 0.028125
-11 0.0231
-12 0.017675
-13 0.013775
-14 0.0112625
-15 0.00875
-};
-\addlegendentry{LMMSE (Uncorrelated)}
-\addplot [thick, darkorange25512714]
-table {%
-1 0.12815
-2 0.10785
-3 0.0883875
-4 0.0674
-5 0.05165
-6 0.04495
-7 0.032625
-8 0.0310375
-9 0.0289625
-10 0.0292
-11 0.0302375
-12 0.034025
-13 0.0394875
-14 0.0390625
-15 0.042575
-};
-\addlegendentry{AMP bin N_it = 16}
-\addplot [thick, forestgreen4416044]
-table {%
-1 0.1294875
-2 0.1056375
-3 0.085775
-4 0.06635
-5 0.0464625
-6 0.0336125
-7 0.0213875
-8 0.0134125
-9 0.0083125
-10 0.0056
-11 0.0027
-12 0.001975
-13 0.00140625
-14 0.00113125
-15 0.000729166666666667
-};
-\addlegendentry{CMDNet bin N_L = 16}
-\addplot [thick, crimson2143940]
-table {%
--6 0.29076875
--5 0.2655375
--4 0.24115
--3 0.22045625
--2 0.1968
--1 0.17360625
-0 0.15236875
-1 0.129025
-2 0.10738125
-3 0.08570625
-4 0.0654
-5 0.0470375
-6 0.03263125
-7 0.0207375
-8 0.01298125
-9 0.00835625
-10 0.004759375
-11 0.00315416666666667
-12 0.00221666666666667
-13 0.001375
-14 0.00108541666666667
-15 0.00078828125
-16 0.000686875
-17 0.000585227272727273
-18 0.0005125
-19 0.000424583333333333
-20 0.00041640625
-21 0.000372426470588235
-22 0.0003984375
-23 0.000334210526315789
-24 0.0003265625
-25 0.000290909090909091
-26 0.000300892857142857
-27 0.00030625
-28 0.00031625
-29 0.000290909090909091
-30 0.000304761904761905
-31 0.000279891304347826
-32 0.000308630952380952
-33 0.00026796875
-34 0.000292045454545455
-35 0.000292613636363636
-36 0.000263020833333333
-};
-\addlegendentry{CMDNet TF1}
-\end{axis}
+    \begin{axis}[
+            legend cell align={left},
+            legend style={fill opacity=0.8, draw opacity=1, text opacity=1, draw=lightgray204},
+            log basis y={10},
+            tick align=outside,
+            tick pos=left,
+            title={Bit/Block Error Rate},
+            x grid style={darkgray176},
+            xlabel={\(\displaystyle E_b/N_0\) (dB)},
+            xmajorgrids,
+            xmin=-8.1, xmax=38.1,
+            xminorgrids,
+            xtick style={color=black},
+            y grid style={darkgray176},
+            ylabel={BER},
+            ymajorgrids,
+            ymin=0.000185273058277288, ymax=0.412786616917776,
+            yminorgrids,
+            ymode=log,
+            ytick style={color=black}
+        ]
+        \addplot [thick, steelblue31119180]
+        table {%
+                1 0.1412
+                2 0.125475
+                3 0.107525
+                4 0.0924875
+                5 0.0771125
+                6 0.066125
+                7 0.0544
+                8 0.0441
+                9 0.0357625
+                10 0.028125
+                11 0.0231
+                12 0.017675
+                13 0.013775
+                14 0.0112625
+                15 0.00875
+            };
+        \addlegendentry{LMMSE (Uncorrelated)}
+        \addplot [thick, darkorange25512714]
+        table {%
+                1 0.12815
+                2 0.10785
+                3 0.0883875
+                4 0.0674
+                5 0.05165
+                6 0.04495
+                7 0.032625
+                8 0.0310375
+                9 0.0289625
+                10 0.0292
+                11 0.0302375
+                12 0.034025
+                13 0.0394875
+                14 0.0390625
+                15 0.042575
+            };
+        \addlegendentry{AMP bin N_it = 16}
+        \addplot [thick, forestgreen4416044]
+        table {%
+                1 0.1294875
+                2 0.1056375
+                3 0.085775
+                4 0.06635
+                5 0.0464625
+                6 0.0336125
+                7 0.0213875
+                8 0.0134125
+                9 0.0083125
+                10 0.0056
+                11 0.0027
+                12 0.001975
+                13 0.00140625
+                14 0.00113125
+                15 0.000729166666666667
+            };
+        \addlegendentry{CMDNet bin N_L = 16}
+        \addplot [thick, crimson2143940]
+        table {%
+                -6 0.29076875
+                -5 0.2655375
+                -4 0.24115
+                -3 0.22045625
+                -2 0.1968
+                -1 0.17360625
+                0 0.15236875
+                1 0.129025
+                2 0.10738125
+                3 0.08570625
+                4 0.0654
+                5 0.0470375
+                6 0.03263125
+                7 0.0207375
+                8 0.01298125
+                9 0.00835625
+                10 0.004759375
+                11 0.00315416666666667
+                12 0.00221666666666667
+                13 0.001375
+                14 0.00108541666666667
+                15 0.00078828125
+                16 0.000686875
+                17 0.000585227272727273
+                18 0.0005125
+                19 0.000424583333333333
+                20 0.00041640625
+                21 0.000372426470588235
+                22 0.0003984375
+                23 0.000334210526315789
+                24 0.0003265625
+                25 0.000290909090909091
+                26 0.000300892857142857
+                27 0.00030625
+                28 0.00031625
+                29 0.000290909090909091
+                30 0.000304761904761905
+                31 0.000279891304347826
+                32 0.000308630952380952
+                33 0.00026796875
+                34 0.000292045454545455
+                35 0.000292613636363636
+                36 0.000263020833333333
+            };
+        \addlegendentry{CMDNet TF1}
+    \end{axis}
 
 \end{tikzpicture}
