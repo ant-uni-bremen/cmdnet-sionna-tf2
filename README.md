@@ -8,7 +8,7 @@ This new CMDNet version is adapted for TensorFlow 2, as the original source code
 You can find the original source code [1] from the PhD thesis [2] and the scientific research articles [3, 4] on [GitHub](https://github.com/ant-uni-bremen/CMDNet) and on [Zenodo](https://doi.org/10.5281/zenodo.8416507):
 
 1. Edgar Beck, Concrete MAP Detection Network (CMDNet) Software, Zenodo, version v1.0.2, Oct. 2023. doi: 10.5281/zenodo.8416507.
-2. Edgar Beck, Advancing Semantic and Digital Communications through Machine Learning, ser. Dissertations from the Department of Communications Engineering, University of Bremen. Düren: Shaker Verlag, Dec. 2025, vol. 15. https://doi.org/10.26092/elib/4791
+2. Edgar Beck, Advancing Semantic and Digital Communications through Machine Learning, ser. Dissertations from the Department of Communications Engineering, University of Bremen, A. Dekorsy, Ed. Düren: Shaker Verlag, Dec. 2025, vol. 15. https://doi.org/10.26092/elib/4791
 3. Edgar Beck, Carsten Bockelmann, and Armin Dekorsy, “CMDNet: Learning a Probabilistic Relaxation of Discrete Variables for Soft Detection With Low Complexity,” IEEE Trans. Commun., vol. 69, no. 12, pp. 8214–8227, Dec. 2021. https://doi.org/10.1109/TCOMM.2021.3114682
 4. Edgar Beck, Carsten Bockelmann, and Armin Dekorsy, “Concrete MAP Detection: A Machine Learning Inspired Relaxation,” in 24th International ITG Workshop on Smart Antennas (WSA 2020), vol. 24, Hamburg, Germany, Feb. 2020, pp. 1–5.
 
